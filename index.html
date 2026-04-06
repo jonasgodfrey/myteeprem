@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTenancyPlus - Property Management Platform</title>
+    <link href="cdn.jsdelivr.net/npm/bootstrap%405.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-gold: #FFD068;
+            --brand-gold-light: #FFF4DB;
+            --brand-red: #C30013;
+            --brand-red-dark: #9a000f;
+            --brand-black: #000000;
+            --brand-dark: #111111;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar */
+        .navbar-custom {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-custom.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-brand img {
+            height: 45px;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar-brand span {
+            color: var(--brand-gold);
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-left: 10px;
+        }
+        
+        .nav-link-custom {
+            color: #fff !important;
+            font-weight: 500;
+            padding: 10px 20px !important;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link-custom:hover {
+            color: var(--brand-gold) !important;
+        }
+        
+        .btn-nav {
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-nav-outline {
+            border: 2px solid var(--brand-gold);
+            color: var(--brand-gold);
+            background: transparent;
+        }
+        
+        .btn-nav-outline:hover {
+            background: var(--brand-gold);
+            color: var(--brand-black);
+        }
+        
+        .btn-nav-solid {
+            background: var(--brand-red);
+            color: #fff;
+            border: none;
+        }
+        
+        .btn-nav-solid:hover {
+            background: var(--brand-red-dark);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Navbar Toggle */
+        .navbar-toggler {
+            border: 2px solid var(--brand-gold);
+            padding: 8px 12px;
+        }
+        
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23FFD068' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+        
+        .navbar-collapse {
+            background: rgba(0, 0, 0, 0.98);
+        }
+        
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                padding: 20px;
+                margin-top: 15px;
+                border-radius: 15px;
+                border: 1px solid rgba(255, 208, 104, 0.2);
+            }
+            
+            .navbar-nav {
+                gap: 10px !important;
+            }
+            
+            .nav-link-custom {
+                padding: 12px 15px !important;
+                border-radius: 10px;
+            }
+            
+            .nav-link-custom:hover {
+                background: rgba(255, 208, 104, 0.1);
+            }
+            
+            .btn-nav {
+                width: 100%;
+                text-align: center;
+                margin-top: 5px;
+            }
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 40%, #111111 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(255, 208, 104, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 50%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(195, 0, 19, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 208, 104, 0.15);
+            border: 1px solid rgba(255, 208, 104, 0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            color: var(--brand-gold);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+        
+        .hero-title span {
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #FFE4A0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-description {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 35px;
+            max-width: 500px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s both;
+        }
+        
+        .btn-hero {
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn-hero-primary {
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #FFE4A0 100%);
+            color: var(--brand-black);
+            box-shadow: 0 10px 30px rgba(255, 208, 104, 0.3);
+        }
+        
+        .btn-hero-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 208, 104, 0.4);
+            color: var(--brand-black);
+        }
+        
+        .btn-hero-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--brand-gold);
+            color: var(--brand-gold);
+        }
+        
+        .hero-image {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            filter: drop-shadow(0 30px 60px rgba(255, 208, 104, 0.2));
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+            animation: fadeInUp 0.8s ease 0.8s both;
+        }
+        
+        .stat-item {
+            text-align: left;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--brand-gold);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 5px;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            background: #fff;
+        }
+        
+        .section-badge {
+            display: inline-block;
+            background: var(--brand-gold-light);
+            color: var(--brand-red);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--brand-black);
+            margin-bottom: 20px;
+        }
+        
+        .section-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto 60px;
+        }
+        
+        .feature-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid #f0f0f0;
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+            border-color: var(--brand-gold);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #FFE4A0 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 2rem;
+            color: var(--brand-black);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--brand-black);
+            margin-bottom: 15px;
+        }
+        
+        .feature-description {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+        }
+        
+        /* How It Works Section */
+        .how-it-works {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #000 0%, #111 100%);
+            position: relative;
+        }
+        
+        .how-it-works .section-title {
+            color: #fff;
+        }
+        
+        .how-it-works .section-description {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .step-card {
+            text-align: center;
+            padding: 30px;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--brand-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--brand-black);
+            margin: 0 auto 25px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .step-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        
+        .step-description {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--brand-red) 0%, #8B0000 100%);
+            text-align: left;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        .cta-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto 35px;
+        }
+        
+        .btn-cta {
+            background: var(--brand-gold);
+            color: var(--brand-black);
+            padding: 18px 45px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            color: var(--brand-black);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #000;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-brand img {
+            height: 50px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.6);
+            max-width: 300px;
+        }
+        
+        .footer-title {
+            color: var(--brand-gold);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--brand-gold);
+            padding-left: 5px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+            padding-top: 30px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                gap: 25px;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-description {
+                font-size: 0.95rem;
+            }
+            
+            .hero-badge {
+                font-size: 0.75rem;
+                padding: 6px 15px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn-hero {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 25px;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-description {
+                font-size: 0.95rem;
+            }
+            
+            .hero-stats {
+                flex-wrap: wrap;
+                gap: 15px;
+                margin-top: 35px;
+            }
+            
+            .stat-item {
+                flex: 1;
+                min-width: 90px;
+                text-align: center;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .stat-label {
+                font-size: 0.75rem;
+            }
+            
+            .features-section {
+                padding: 60px 0;
+            }
+            
+            .feature-card {
+                padding: 25px 20px;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            
+            .feature-title {
+                font-size: 1.1rem;
+            }
+            
+            .feature-description {
+                font-size: 0.85rem;
+            }
+            
+            .how-it-works {
+                padding: 60px 0;
+            }
+            
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .step-title {
+                font-size: 1rem;
+            }
+            
+            .step-description {
+                font-size: 0.85rem;
+            }
+            
+            .cta-section {
+                padding: 60px 0;
+            }
+            
+            .cta-title {
+                font-size: 1.5rem;
+            }
+            
+            .cta-description {
+                font-size: 0.95rem;
+            }
+            
+            .btn-cta {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+            
+            .footer {
+                padding: 40px 0 20px;
+            }
+            
+            .footer-title {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+            
+            .footer-links li {
+                margin-bottom: 8px;
+            }
+            
+            .footer-brand p {
+                font-size: 0.85rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                padding-top: 80px;
+            }
+            
+            .hero-title {
+                font-size: 1.6rem;
+            }
+            
+            .navbar-brand span {
+                font-size: 1.1rem;
+            }
+            
+            .navbar-brand img {
+                height: 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top" data-testid="navbar">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="customer-assets.emergentagent.com/job_mytenancyplus/artifacts/m0dc7ukt_Asset%202%20(2).png" alt="MyTenancyPlus">
+                <span>MyTenancyPlus</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" href="#how-it-works">How It Works</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="https://app.mytenancyplus.com" class="btn btn-nav btn-nav-outline" data-testid="nav-login-btn">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://app.mytenancyplus.com/register" class="btn btn-nav btn-nav-solid" data-testid="nav-register-btn">
+                            Get Started
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" data-testid="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-badge">
+                        <i class="fas fa-star me-2"></i>Trusted by 3+ Property Managers
+                    </div>
+                    <h1 class="hero-title" data-testid="hero-title">
+                        Smart Property Management <span>Made Simple</span>
+                    </h1>
+                    <p class="hero-description">
+                        Streamline your property operations with our all-in-one platform. 
+                        Manage tenants, track payments, handle maintenance requests, and grow your portfolio effortlessly.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://app.mytenancyplus.com/register" class="btn-hero btn-hero-primary" data-testid="hero-get-started">
+                            Get Started Free
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="https://app.mytenancyplus.com" class="btn-hero btn-hero-secondary" data-testid="hero-login">
+                            <i class="fas fa-play-circle"></i>
+                            Sign In
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Listed Properties</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">20+</div>
+                            <div class="stat-label">Tenants Onboarded</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">99%</div>
+                            <div class="stat-label">Satisfaction Rate</div>                   
+                           
+                        </div>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">                            
+                            <a href="https://apps.apple.com/ca/app/mytenancyplus/id6753888018"><img src="/img/apple-store.svg" alt="Apple App Store" class="object-contain" style="height:48px;" width="144" height="48" loading="lazy"></a> 
+                        </div>
+                        <div class="stat-item">                            
+                            <a href="https://play.google.com/store/apps/details?id=com.owujupe.my_tenancy_plus_kte_one"><img src="/img/google-play-store-badge.png" alt="Apple App Store" class="object-contain" style="height:48px;" width="144" height="48" loading="lazy"></a>
+                        </div>                       
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="hero-image text-center">
+                        <img src="customer-assets.emergentagent.com/job_mytenancyplus/artifacts/m0dc7ukt_Asset%202%20(2).png" 
+                             alt="MyTenancyPlus Dashboard" style="max-width: 400px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features" data-testid="features-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-badge">Features</span>
+                <h2 class="section-title">Everything You Need to Manage Properties</h2>
+                <p class="section-description">
+                    Powerful tools designed to simplify property management for landlords and enhance the experience for tenants.
+                </p>
+            </div>
+            <div class="row g-4">
+                
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card" data-testid="feature-tenants">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3 class="feature-title">Tenant Management</h3>
+                        <p class="feature-description">
+                            Easily manage tenant information, lease agreements, and communications all in one centralized dashboard.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card" data-testid="feature-properties">
+                        <div class="feature-icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <h3 class="feature-title">Property Portfolio</h3>
+                        <p class="feature-description">
+                            Manage multiple properties with detailed unit tracking, occupancy rates, and revenue analytics.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card" data-testid="feature-notifications">
+                        <div class="feature-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <h3 class="feature-title">Smart Notifications</h3>
+                        <p class="feature-description">
+                            Automated rent reminders, maintenance updates, and important announcements sent via email and in-app.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card" data-testid="feature-analytics">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="feature-title">Analytics Dashboard</h3>
+                        <p class="feature-description">
+                            Get insights into revenue, occupancy trends, and property performance with comprehensive analytics.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card" data-testid="feature-payments">
+                        <div class="feature-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3 class="feature-title">Smart Payments</h3>
+                        <p class="feature-description">
+                            Track rent payments, send automatic reminders, and earn loyalty points for timely payments. Multiple currency support included.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card" data-testid="feature-maintenance">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="feature-title">Maintenance Tracking</h3>
+                        <p class="feature-description">
+                            Submit and track maintenance requests with real-time status updates. Keep your properties in top condition.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works" data-testid="how-it-works-section">
+        <div class="container">
+            <div class="text-center">
+                <span class="section-badge">How It Works</span>
+                <h2 class="section-title">Get Started in 3 Simple Steps</h2>
+                <p class="section-description">
+                    Setting up your property management system has never been easier.
+                </p>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Create Account</h3>
+                        <p class="step-description">Sign up as a property admin and set up your profile in minutes.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Add Properties</h3>
+                        <p class="step-description">Add your properties and units with all relevant details and pricing.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Invite Tenants</h3>
+                        <p class="step-description">Add tenants to units and start managing your properties efficiently.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" data-testid="cta-section">
+        <div class="container">
+            <!-- <h2 class="cta-title">Ready to Simplify Your Property Management?</h2>
+            <p class="cta-description">
+                Join hundreds of property managers who have transformed their operations with MyTenancyPlus.
+            </p>
+            <a href="https://app.mytenancyplus.com/register" class="btn-cta" data-testid="cta-button">
+                Start Free Trial
+                <i class="fas fa-arrow-right"></i>
+            </a>
+        </div> -->
+        <div class="row">
+                <div class="col-lg-6">
+                    
+                    <h1 class="hero-title" data-testid="hero-title">
+                        Empower Renters with the right <span> tools.</span>
+                    </h1>
+                     <div class="hero-stats">
+                        <div class="stat-item">                            
+                            <a href="https://apps.apple.com/ca/app/mytenancyplus/id6753888018"><img src="/img/apple-store.svg" alt="Apple App Store" class="object-contain" style="height:48px;" width="144" height="48" loading="lazy"></a> 
+                        </div>
+                        <div class="stat-item">                            
+                            <a href="https://play.google.com/store/apps/details?id=com.owujupe.my_tenancy_plus_kte_one"><img src="/img/google-play-store-badge.png" alt="Apple App Store" class="object-contain" style="height:48px;" width="144" height="48" loading="lazy"></a>
+                        </div>                       
+                    </div>
+                </div> 
+                    
+                   
+                
+                
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="hero-image text-center">
+                        <img src="/img/mytplusapp.png" 
+                             alt="MyTenancyPlus Dashboard" style="max-width: 400px;">
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" data-testid="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="footer-brand">
+                        <img src="customer-assets.emergentagent.com/job_mytenancyplus/artifacts/m0dc7ukt_Asset%202%20(2).png" alt="MyTenancyPlus">
+                        <p>The complete property management solution for real estate managers, landlords and tenants. Streamline your operations today.</p>
+                    </div>
+                     <div class="hero-stats">
+                        <div class="stat-item">                            
+                            <a href="https://apps.apple.com/ca/app/mytenancyplus/id6753888018"><img src="/img/apple-store.svg" alt="Apple App Store" class="object-contain" style="height:48px;" width="144" height="48" loading="lazy"></a> 
+                        </div>
+                        <div class="stat-item">                            
+                        <a href="https://play.google.com/store/apps/details?id=com.owujupe.my_tenancy_plus_kte_one"><img src="/img/google-play-store-badge.png" alt="Apple App Store" class="object-contain" style="height:48px;" width="144" height="48" loading="lazy"></a>
+                        </div>                       
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h4 class="footer-title">Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="https://app.mytenancyplus.com">Login</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="/pages/privacypolicy.html">Privacy Policy</a></li>
+                        <li><a href="/pages/tnc.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h4 class="footer-title">Connect</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://www.x.com/mytenancyplus/"><i class="fab fa-twitter me-2"></i>Twitter</a></li>
+                        <li><a href="https://www.linkedin.com/company/mytenancyplus"><i class="fab fa-linkedin me-2"></i>LinkedIn</a></li>
+                        <li><a href="https://www.facebook.com/mytenancyplus"><i class="fab fa-facebook me-2"></i>Facebook</a></li>
+                        <li><a href="https://www.instagram.com/mytenancyplus"><i class="fab fa-instagram me-2"></i>Instagram</a></li>
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 MyTenancyPlus. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="cdn.jsdelivr.net/npm/bootstrap%405.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-custom');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+
+</html>

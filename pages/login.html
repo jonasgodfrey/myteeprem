@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from pages/login by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Apr 2026 13:14:42 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MyTenancyPlus</title>
+    <link href="../cdn.jsdelivr.net/npm/bootstrap%405.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-gold: #FFD068;
+            --brand-gold-light: #FFF4DB;
+            --brand-red: #C30013;
+            --brand-red-dark: #9a000f;
+            --brand-black: #000000;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            background: linear-gradient(135deg, #000000 0%, #0a0a0a 40%, #111111 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(255, 208, 104, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 50%;
+            height: 80%;
+            background: radial-gradient(ellipse, rgba(195, 0, 19, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        .login-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+        
+        /* Left Side - Branding */
+        .login-branding {
+            flex: 1;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+            position: relative;
+        }
+        
+        @media (min-width: 992px) {
+            .login-branding {
+                display: flex;
+            }
+        }
+        
+        .branding-content {
+            max-width: 500px;
+        }
+        
+        .branding-logo {
+            margin-bottom: 40px;
+        }
+        
+        .branding-logo img {
+            height: 60px;
+        }
+        
+        .branding-logo span {
+            color: var(--brand-gold);
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-left: 15px;
+            vertical-align: middle;
+        }
+        
+        .branding-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+        
+        .branding-title span {
+            background: linear-gradient(135deg, var(--brand-gold) 0%, #FFE4A0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .branding-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+        
+        .branding-features {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .branding-features li {
+            display: flex;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .branding-features li i {
+            color: var(--brand-gold);
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        /* Right Side - Form */
+        .login-form-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .login-card {
+            background: #fff;
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--brand-gold), var(--brand-red));
+        }
+        
+        .card-header-custom {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .card-logo {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--brand-black);
+            margin-bottom: 8px;
+        }
+        
+        .card-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label-custom {
+            font-weight: 600;
+            color: var(--brand-black);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--brand-gold);
+            font-size: 1.1rem;
+            z-index: 2;
+        }
+        
+        .form-control-custom {
+            width: 100%;
+            padding: 14px 15px 14px 50px;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+        
+        .form-control-custom:focus {
+            outline: none;
+            border-color: var(--brand-gold);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 208, 104, 0.15);
+        }
+        
+        .form-control-custom.is-invalid {
+            border-color: var(--brand-red);
+        }
+        
+        .error-text {
+            color: var(--brand-red);
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .remember-check {
+            display: flex;
+            align-items: center;
+        }
+        
+        .remember-check input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin-right: 10px;
+            accent-color: var(--brand-red);
+        }
+        
+        .remember-check label {
+            color: #555;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .forgot-link {
+            color: var(--brand-red);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .forgot-link:hover {
+            color: var(--brand-red-dark);
+            text-decoration: underline;
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--brand-red) 0%, var(--brand-red-dark) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(195, 0, 19, 0.35);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+        }
+        
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #e8e8e8;
+        }
+        
+        .divider-text {
+            padding: 0 15px;
+            color: #999;
+            font-size: 0.85rem;
+        }
+        
+        .register-prompt {
+            text-align: center;
+        }
+        
+        .register-prompt span {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .register-link {
+            color: var(--brand-red);
+            text-decoration: none;
+            font-weight: 600;
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .register-link:hover {
+            color: var(--brand-red-dark);
+            text-decoration: underline;
+        }
+        
+        .back-home {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-home:hover {
+            color: var(--brand-gold);
+        }
+        
+        .alert-custom {
+            padding: 12px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .alert-success-custom {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-danger-custom {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        /* Decorative Elements */
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--brand-gold);
+            opacity: 0.1;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            top: -150px;
+            right: -100px;
+        }
+        
+        .circle-2 {
+            width: 200px;
+            height: 200px;
+            bottom: -100px;
+            left: -50px;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-home" data-testid="back-home-link">
+        <i class="fas fa-arrow-left"></i>
+        Back to Home
+    </a>
+    
+    <div class="login-container">
+        <!-- Left Side - Branding -->
+        <div class="login-branding">
+            <div class="branding-content">
+                <div class="branding-logo">
+                    <img src="../customer-assets.emergentagent.com/job_mytenancyplus/artifacts/m0dc7ukt_Asset%202%20(2).png" alt="MyTenancyPlus">
+                    <span>MyTenancyPlus</span>
+                </div>
+                <h1 class="branding-title">
+                    Welcome Back to <span>MyTenancyPlus</span>
+                </h1>
+                <p class="branding-description">
+                    Sign in to access your property management dashboard. Manage tenants, track payments, and keep your properties running smoothly.
+                </p>
+                <ul class="branding-features">
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Real-time payment tracking & reminders
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Instant maintenance request updates
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Comprehensive property analytics
+                    </li>
+                    <li>
+                        <i class="fas fa-check-circle"></i>
+                        Multi-currency support
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Right Side - Login Form -->
+        <div class="login-form-container">
+            <div class="login-card" data-testid="login-card">
+                <div class="decorative-circle circle-1"></div>
+                <div class="decorative-circle circle-2"></div>
+                
+                <div class="card-header-custom">
+                    <img src="../customer-assets.emergentagent.com/job_mytenancyplus/artifacts/m0dc7ukt_Asset%202%20(2).png" 
+                         alt="MyTenancyPlus" class="card-logo">
+                    <h2 class="card-title">Sign In</h2>
+                    <p class="card-subtitle">Enter your credentials to access your account</p>
+                </div>
+                
+                                
+                                
+                <form method="POST" action="https://pages/login" data-testid="login-form">
+                    <input type="hidden" name="_token" value="FS8KHnGeVK88Ed4vMGjNpXTCORHsWasTuq5WwBD7" autocomplete="off">                    
+                    <div class="form-group">
+                        <label class="form-label-custom">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" 
+                                   name="email" 
+                                   class="form-control-custom " 
+                                   value="" 
+                                   placeholder="Enter your email"
+                                   required 
+                                   autofocus
+                                   data-testid="login-email">
+                        </div>
+                                            </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label-custom">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" 
+                                   name="password" 
+                                   class="form-control-custom " 
+                                   placeholder="Enter your password"
+                                   required
+                                   data-testid="login-password">
+                        </div>
+                                            </div>
+                    
+                    <div class="form-options">
+                        <div class="remember-check">
+                            <input type="checkbox" name="remember" id="remember" data-testid="remember-checkbox">
+                            <label for="remember">Remember me</label>
+                        </div>
+                        <a href="forgot-password.html" class="forgot-link" data-testid="forgot-password-link">
+                            Forgot Password?
+                        </a>
+                    </div>
+                    
+                    <button type="submit" class="btn-login" data-testid="login-submit">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Sign In
+                    </button>
+                </form>
+                
+                <div class="divider">
+                    <div class="divider-line"></div>
+                    <span class="divider-text">New here?</span>
+                    <div class="divider-line"></div>
+                </div>
+                
+                <div class="register-prompt">
+                    <span>Don't have an account?</span>
+                    <a href="register.html" class="register-link" data-testid="register-link">
+                        Create Account
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<!-- Mirrored from pages/login by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 06 Apr 2026 13:14:42 GMT -->
+</html>
